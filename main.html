@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Space</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="main.html">
+                <img src="logo.png" alt="Film Space Logo">
+            </a>
+        </div>        
+        <div class="burger-menu" onclick="toggleMenu()">&#9776;</div>
+        <div class="nav-menu">
+            <a href="#home">Home</a>
+            <a href="#carousel-section">Movies</a>
+            <a href="#trailers">New trailers</a>
+            <a href="#price">Price</a>
+            <a href="#" onclick="toggleFeedback()">Feedback</a>
+
+        </div>
+        <div class="icons">
+            <img src="Frame.svg" alt="Search Icon" style="height: 39px; width: 39px;" onclick="toggleSearch()">
+            <input type="text" id="search-bar" placeholder="Search..." class="search-bar">
+            <img src="User.svg" alt="User Icon" style="height: 33px; width: 33px;">
+        </div>
+    </div>
+    <nav class="mobile-nav-menu" id="mobile-nav-menu">
+        <button class="close-menu" onclick="toggleMenu()">✖</button>
+        <a href="#home">Home</a>
+        <a href="#carousel-section">Movies</a>
+        <a href="#trailers">New trailers</a>
+        <a href="#price">Price</a>
+        <a href="#" onclick="toggleFeedback()">Feedback</a>
+    </nav>
+</header>
+
+<div class="modal-overlay" id="modal-overlay" onclick="toggleFeedback()"></div>
+<div class="feedback-section" id="feedback-section">
+    <button class="close-modal" onclick="toggleFeedback()">✖</button>
+    <h2>Feedback</h2>
+    <form class="feedback-form">
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea placeholder="Your Feedback" rows="4"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('mobile-nav-menu');
+    menu.classList.toggle('active');
+}
+
+function toggleSearch() {
+    const searchBar = document.getElementById('search-bar');
+    searchBar.classList.toggle('active');
+    searchBar.focus();
+}
+
+function toggleFeedback() {
+    const feedbackModal = document.getElementById('feedback-section');
+    const overlay = document.getElementById('modal-overlay');
+    feedbackModal.classList.toggle('hidden');
+    overlay.classList.toggle('hidden');
+}
+</script>
+
+
+<div class="background-blur"></div>
+<div class="container">
+    <!-- carousel -->
+    <div class="carousel" id="home">
+        <img src="dark_knight.png" alt="The Dark Knight" class="active" data-title="The Dark Knight">
+        <img src="godfather.png" alt="The Godfather" data-title="The Godfather">
+        <img src="shawshank.png" alt="The Shawshank Redemption" data-title="The Shawshank Redemption">
+        <div class="title">The Dark Knight</div>
+        <div class="carousel-dots">
+            <div class="active" data-index="0"></div>
+            <div data-index="1"></div>
+            <div data-index="2"></div>
+        </div>
+    </div>
+    <!-- carousel -->
+    <div class="trending">
+        <h3>Trending <span></span></h3>
+        <ol>
+            <li>The Shawshank Redemption</li>
+            <li>The Godfather</li>
+            <li>The Dark Knight</li>
+            <li>12 Angry Men</li>
+            <li>Schindler's List</li>
+            <li>The Lord of the Rings</li>
+            <li>Pulp Fiction</li>
+            <li>Forrest Gump</li>
+            <li>Fight Club</li>
+            <li>Inception</li>
+        </ol>
+    </div>
+</div>
+
+
+<!-- banner -->
+<div class="info-banner">
+    <a href="#">FilmSpace</a> now has version for your TV
+    <img src="tv_icon.svg" alt="TV Icon">
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.carousel img');
+    const dots = document.querySelectorAll('.carousel-dots div');
+    const title = document.querySelector('.carousel .title');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        title.textContent = slides[index].getAttribute('data-title');
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    }
+
+    setInterval(nextSlide, 5000);
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            currentIndex = parseInt(dot.dataset.index);
+            showSlide(currentIndex);
+        });
+    });
+</script>
+
+<div class="film-carousel-background">
+
+    <!-- Popular on platform -->
+    <div class="film-carousel-section" id="carousel-section">
+        <h3>Popular on platform</h3>
+        <div class="film-carousel">
+            <button class="film-arrow left" onclick="scrollCarousel('film-carousel-1', -300)">&#9664;</button>
+            <div class="film-carousel-container" id="film-carousel-1">
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+            </div>
+            <button class="film-arrow right" onclick="scrollCarousel('film-carousel-1', 300)">&#9654;</button>
+        </div>
+    </div>
+
+    <div class="film-carousel-section">
+        <h3>Popular in your country</h3>
+        <div class="film-carousel">
+            <button class="film-arrow left" onclick="scrollCarousel('film-carousel-2', -300)">&#9664;</button>
+            <div class="film-carousel-container" id="film-carousel-2">
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+                <div class="film-carousel-item"><img src="alone.png" alt="Alone"></div>
+                <div class="film-carousel-item"><img src="joker.png" alt="Joker"></div>
+                <div class="film-carousel-item"><img src="silence.png" alt="Silence of the Lambs"></div>
+            </div>
+            <button class="film-arrow right" onclick="scrollCarousel('film-carousel-2', 300)">&#9654;</button>
+        </div>
+    </div>
+    <script>
+        function scrollCarousel(carouselId, distance) {
+            const carousel = document.getElementById(carouselId);
+            carousel.scrollBy({ left: distance, behavior: 'smooth' });
+        }
+    </script>
+
+
+<!-- Genre section -->
+<div class="genre-carousel">
+    <h3 class="genre-title">Genres</h3>
+    <div class="carousel-wrapper">
+        <button class="carousel-arrow left" onclick="scrollCarousel('genre-carousel', -300)">&#9664;</button>
+        <div class="carousel-container" id="genre-carousel">
+            <div class="genre-item">
+                <img src="tv_shows.png" alt="TV Shows">
+                <div class="genre-label">TV Shows</div>
+            </div>
+            <div class="genre-item">
+                <img src="comedy.png" alt="Comedy">
+                <div class="genre-label">Comedy</div>
+            </div>
+            <div class="genre-item">
+                <img src="documentary.png" alt="Documentary">
+                <div class="genre-label">Documentary</div>
+            </div>
+            <div class="genre-item">
+                <img src="anime.png" alt="Anime">
+                <div class="genre-label">Anime</div>
+            </div>
+            <div class="genre-item">
+                <img src="action.png" alt="Action">
+                <div class="genre-label">Action</div>
+            </div>
+            <div class="genre-item">
+                <img src="horror.png" alt="Horror">
+                <div class="genre-label">Horror</div>
+            </div>
+            <div class="genre-item">
+                <img src="drama.png" alt="Drama">
+                <div class="genre-label">Drama</div>
+            </div>
+            <div class="genre-item">
+                <img src="thriller.png" alt="Thriller">
+                <div class="genre-label">Thriller</div>
+            </div>
+        </div>
+        <button class="carousel-arrow right" onclick="scrollCarousel('genre-carousel', 300)">&#9654;</button>
+    </div>
+</div>
+
+<script>
+function scrollCarousel(carouselId, distance) {
+    const carousel = document.getElementById(carouselId);
+    carousel.scrollBy({ left: distance, behavior: 'smooth' });
+}
+</script>
+
+
+<!-- Trailer Section -->
+<div class="trailer-section" id="trailers">
+    <div class="trailer-header">
+        <h2>Random trailer of upcoming films</h2>
+        <button onclick="loadNextTrailer()" class="refresh-button">&#x21bb;</button>
+    </div>
+    <div class="trailer-container">
+        <video id="trailerVideo" controls loop>
+            <source src="trailers/trailer1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script>
+    const trailers = [
+        'trailers/trailer1.mp4',
+        'trailers/trailer2.mp4',
+        'trailers/trailer3.mp4'
+    ];
+    let currentTrailerIndex = 0;
+
+    function loadNextTrailer() {
+        currentTrailerIndex = (currentTrailerIndex + 1) % trailers.length;
+        const trailerVideo = document.getElementById('trailerVideo');
+        trailerVideo.src = trailers[currentTrailerIndex];
+
+        trailerVideo.play().catch(error => {
+            console.log("Автовідтворення блокується браузером. Натисніть на відео, щоб розпочати.", error);
+        });
+    }
+</script>
+
+<!-- Reviews Section -->
+<div class="reviews-section" id="reviews">
+    <h2>Reviews</h2>
+    <div class="review-cards-container">
+        <div class="review-card light-card">
+            <img src="shawshank_poster.png" alt="The Shawshank Redemption Poster" class="review-poster">
+            <div class="review-content">
+                <h3 class="black-text">Rolling Stone <span class="review-author black-text">Peter Travers</span></h3>
+                <p class="black-text">It's the no-bull performances that hold back the flood of banalities. Robbins and Freeman connect with the bruised souls of Andy and Red to create something undeniably powerful and moving.</p>
+                <div class="stars black-stars">★★★★★</div>
+            </div>
+        </div>
+        <div class="review-card dark-card">
+            <img src="joker_poster.png" alt="Joker Poster" class="review-poster">
+            <div class="review-content">
+                <h3 class="white-text">NME <span class="review-author white-text">Matthew Turner</span></h3>
+                <p class="white-text">Phillips and Silver have delivered the last thing anyone expected: a socially responsible Joker movie that finds an intriguing way to explore the consequences (both on and offscreen) of the first film.</p>
+                <div class="stars white-stars">★★★☆☆</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pricing Section -->
+<div class="pricing-section" id="price">
+    <h2>Prices</h2>
+    <div class="pricing-carousel">
+        <div class="pricing-card basic">
+            <h3>BASIC</h3>
+            <p class="price">$5.99</p>
+            <p>per month</p>
+            <ul>
+                <li>Access to basic movie library</li>
+                <li>Standard definition (SD) quality</li>
+                <li>1 device at a time</li>
+                <li>Ads included</li>
+            </ul>
+            <button>Subscribe now</button>
+        </div>
+        
+        <div class="pricing-card premium">
+            <h3>PREMIUM</h3>
+            <p class="price">$9.99</p>
+            <p>per month</p>
+            <ul>
+                <li>Access to entire movie library</li>
+                <li>HD quality</li>
+                <li>2 devices at a time</li>
+                <li>No ads</li>
+            </ul>
+            <button>Subscribe now</button>
+        </div>
+        
+        <div class="pricing-card ultimate">
+            <h3>ULTIMATE</h3>
+            <p class="price">$14.99</p>
+            <p>per month</p>
+            <ul>
+                <li>Access to entire movie and series library</li>
+                <li>4K Ultra HD quality</li>
+                <li>4 devices at a time</li>
+                <li>No ads + Exclusive content</li>
+            </ul>
+            <button>Subscribe now</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="footer">
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section socials-section">
+                <p><strong>Socials:</strong></p>
+                <div class="social-icons">
+                    <div class="social-column">
+                        <a href="mailto:filmspace@gmail.com">filmspace@gmail.com</a>
+                        <a href="https://wa.me/380994581452">
+                            <img src="whatsapp-icon.png" alt="WhatsApp"> +380 99 458 1452
+                        </a>
+                    </div>
+                    <div class="social-column">
+                        <a href="https://instagram.com/film.space" target="_blank">
+                            <img src="instagram-icon.png" alt="Instagram"> - film.space
+                        </a>
+                        <a href="https://t.me/Film.space" target="_blank">
+                            <img src="telegram-icon.png" alt="Telegram"> - @Film.space
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section payment-icons">
+                <img src="visa-icon.png" alt="Visa">
+                <img src="mastercard-icon.png" alt="Mastercard">
+            </div>
+            <div class="footer-section download-apps">
+                <a href="https://play.google.com/store">
+                    <img src="google-play-icon.png" alt="Google Play">
+                </a>
+                <a href="https://www.apple.com/app-store/">
+                    <img src="app-store-icon.png" alt="App Store">
+                </a>
+                <a href="your-smart-tv-link">
+                    <img src="smart-tv-icon.png" alt="Smart TV">
+                </a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+</body>
+</html>
